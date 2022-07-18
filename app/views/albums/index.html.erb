@@ -1,14 +1,18 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="album-header">
+    <h1>Your albums</h1>
+    <%= link_to "New album", new_album_path %>
+  </div>
 
-<h1>Albums</h1>
-
-<div id="albums">
-  <% @albums.each do |album| %>
-    <%= render album %>
-    <p>
-      <%= link_to "Show this album", album %>
-    </p>
-  <% end %>
+  <div id="albums">
+    <% @albums.each do |album| %>
+      <div class="album">
+        <h3><%= album.title %></h3>
+        <p><%= album.description %></p>
+        <p>
+          <%= link_to "Show this album", album %>
+        </p>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New album", new_album_path %>

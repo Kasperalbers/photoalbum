@@ -4,4 +4,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  root to: 'albums#index'
+  resources :albums do
+    member do
+      delete :delete_album_photos
+    end
+  end
 end

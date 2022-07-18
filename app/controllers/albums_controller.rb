@@ -57,14 +57,21 @@ class AlbumsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_album
-      @album = Album.find(params[:id])
-    end
+  def delete_album_photos
+    attachment = ActiveStorage::Attachment.find(params[:id])
+    attachment.purge
+    redirect_back(fallback_location: albums_path)
+  end
 
-    # Only allow a list of trusted parameters through.
-    def album_params
-      params.require(:album).permit(:title, :description)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_album
+    @album = Album.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def album_params
+    params.require(:album).permit(:title, :description, album_photos: [])
+  end
 end
